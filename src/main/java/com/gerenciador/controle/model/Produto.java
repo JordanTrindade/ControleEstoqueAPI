@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -32,16 +33,16 @@ public class Produto implements Serializable{
 	@Size(min = 1, max = 255, message = "Descricao com mais de 255 caracteres")
 	private String descricao;
 	
-	//Depois voltar a categoria como nullable = false
-	@Column(name = "CATEGORIA", nullable = true)
-	@Size(min = 1, max = 255, message = "Descricao com mais de 255 caracteres")
-	private String categoria;
-	
 	@Column(name = "PRECO")
 	private Double preco;
 	
 	@Column(name = "QUANTIDADE")
 	private Integer quantidade;
+	
+	//Depois voltar a categoria como nullable = false
+	@ManyToOne
+	@Size(min = 1, max = 255, message = "Descricao com mais de 255 caracteres")
+	private Categoria categoria;
 
 	public Produto() {
 		super();
@@ -86,11 +87,11 @@ public class Produto implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
