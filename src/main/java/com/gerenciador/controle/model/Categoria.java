@@ -1,6 +1,7 @@
 package com.gerenciador.controle.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,9 +33,10 @@ public class Categoria implements Serializable {
 	@NotBlank
 	private String nome;
 	
-	private Date dataCriacao;
+
+	private LocalDateTime dataCriacao;
 	
-	private Date dataAlteracao;
+	private Date dataAlteracao = new Date();
 
 	@OneToMany(mappedBy  = "categoria")
 	private List<Produto> produtos = new ArrayList<>();
@@ -45,7 +47,7 @@ public class Categoria implements Serializable {
 	
 	public Categoria(Long id,
 			@Size(min = 1, max = 255, message = "Nome nulo ou maior do que 255 caracteres") @NotBlank String nome,
-			Date dataCriacao, Date dataAlteracao) {
+			LocalDateTime dataCriacao, Date dataAlteracao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -69,11 +71,11 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-	public Date getDataCriacao() {
+	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
